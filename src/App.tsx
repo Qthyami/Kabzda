@@ -5,9 +5,7 @@ import {Rating} from "./Components/Rating";
 
 
 
-function sum(a: number,b: number) {
-    return a+b;
-}
+
 function App() {
   console.log("App rendered");
   return (
