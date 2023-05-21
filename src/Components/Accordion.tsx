@@ -1,22 +1,40 @@
 import React from "react";
 
-
-function  Accordion (props: any) {
-    console.log("Accordion rendered");
-    return (
-
-        <div>
-
-            <AccordionTile title={props.titleValue}/>
-            <AccordionBody/>
-        </div>
-    )
+type AccordionPropsType = {
+    titleValue: string;
+    collapsed : boolean;
 }
-const AccordionTile=(props:any)=>{
+function  Accordion (props: AccordionPropsType) {
+    console.log("Accordion rendered");
+    if (props.collapsed === true ) {
+        return (
+
+            <div>
+                <AccordionTile title={props.titleValue}/>
+            </div>
+        )
+    }else {
+        return (
+            <div>
+                <AccordionTile title={props.titleValue}/>
+                <AccordionBody/>
+            </div>
+
+        )
+    }
+}
+type AccordionTileType ={
+    title: string;
+}
+
+const AccordionTile=(props: AccordionTileType )=>{
 
     console.log("AccordionTile rendering")
-    return(props.title)
+    return   (
+        <h3> {props.title}</h3>)
 }
+
+
 const AccordionBody=(props:any)=>{
     console.log("AccordionBody rendering")
     return ( <ul>
@@ -25,4 +43,19 @@ const AccordionBody=(props:any)=>{
         <li>3</li>
     </ul>)
 }
+const AccordionCollapsed =(props:any ) =>{
+    if (props.collapsed = true){
+        return (
+            <div>
+                <AccordionTile title={props.titleValue}/>
+            </div>
+        )
+    } else return (
+        <div>
+            <AccordionTile title={props.titleValue}/>
+            <AccordionBody/>
+        </div>
+    )
+}
+
 export default Accordion;
