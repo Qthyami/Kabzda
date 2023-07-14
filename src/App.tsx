@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import Accordion from "./Components/Accordion";
 import {Rating} from "./Components/Rating";
-
-
+import {OnOff} from "./Components/OnOff";
+import {UncontrolledAccordion} from "./UncontrolledAccordion";
 
 
 function App() {
@@ -13,10 +13,11 @@ function App() {
         <AppTitle title={"This is APP component"}/>
         <AppTitle title={"My friends"}/>
 
+
         <p>Article 1</p>
-        <Rating value ={2}/>
-        <Accordion titleValue={"Menu"} collapsed = {true}/>
-        <Accordion titleValue={"Users"} collapsed = {true} />
+        {/*<Rating value ={2}/>*/}
+        {/*<Accordion titleValue={"Menu"} collapsed = {true}/>*/}
+
         <p>Article 2</p>
         <Rating value ={0}/>
         <Rating value ={1}/>
@@ -24,6 +25,8 @@ function App() {
         <Rating value ={3}/>
         <Rating value ={4}/>
         <Rating value ={5}/>
+        <OnOff isOn={false}/>
+
     </div>
   );
 }
