@@ -11,7 +11,7 @@ export type SelectItemsType = {
     value: string;
 };
 
-export const ControlledSelect = (props: ControlledSelectProps) => {
+const ControlledSelect = React.memo((props: ControlledSelectProps) => {
     const [parentValue, setParentValue] = useState<string>(props.value);
 
     const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -29,4 +29,12 @@ export const ControlledSelect = (props: ControlledSelectProps) => {
             ))}
         </select>
     );
-};
+}, (prevProps, nextProps) => {
+    // Функция сравнения для определения, нужно ли перерисовывать компонент
+    return (
+        prevProps.value === nextProps.value &&
+        prevProps.items === nextProps.items
+    );
+});
+
+export default ControlledSelect;
