@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { Story, Meta } from '@storybook/react';
 import { UncontrolledAccordion } from '../UncontrolledAccordion';
+import {propsType} from "../Components/ClockDimych";
+import {AnalogClockMine, AnalogClockMinePropsType} from "../Components/ClockMineAnalog";
 type argsType={
 
 
@@ -83,3 +85,8 @@ export const Default = Template.bind({});
 Default.args = {
     titleValue: 'DeathClock',
 };
+const AnalogClockTemplate: Story<AnalogClockMinePropsType> = (args) => <AnalogClockMine {...args} />;
+
+
+export const AnalogMine = AnalogClockTemplate.bind({});
+AnalogMine.args = {};

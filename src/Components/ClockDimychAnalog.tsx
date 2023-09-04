@@ -1,49 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import styles from "./ClockDimychAnalog.module.css"
+export type ClockDimychAnalogPropsType = {
+date:Date
+}
+export const ClockDimychAnalog = (props:ClockDimychAnalogPropsType) => {
+const seconds = props.date.getSeconds()
+const minutes= props.date.getMinutes();
+const hours= props.date.getHours();
 
-export type propsType = {};
-
-export const AnalogClock: React.FC<propsType> = () => {
-    const [date, setDate] = useState(new Date());
-
-    useEffect(() => {
-        const intervalID = setInterval(() => {
-            setDate(new Date());
-        }, 1000);
-
-        return () => {
-            clearInterval(intervalID);
-        };
-    }, []);
-
-    const secondsRotation = (date.getSeconds() / 60) * 360; // 60 секунд - 360 градусов
-    const minutesRotation = ((date.getMinutes() * 60 + date.getSeconds()) / 3600) * 360; // 60 минут - 360 градусов
+    const secondsStyle = {
+        transform: `rotate(${seconds * 6}deg)`
+    };
+    const minutesStyle = {
+        transform: `rotate(${minutes * 6}deg)`
+    };
+    const hoursStyle = {
+        transform: `rotate(${hours * 30}deg)`
+    };
 
     return (
-        <div className="analog-clock">
-            <svg width="200" height="200">
-                {/* Циферблат */}
-                <circle cx="100" cy="100" r="90" fill="white" stroke="black" strokeWidth="2" />
-
-                {/* Секундная стрелка */}
-                <line
-                    x1="100"
-                    y1="100"
-                    x2={100 + 60 * Math.sin((secondsRotation - 90) * (Math.PI / 180))}
-                    y2={100 - 60 * Math.cos((secondsRotation - 90) * (Math.PI / 180))}
-                    stroke="red"
-                    strokeWidth="1"
-                />
-
-                {/* Минутная стрелка */}
-                <line
-                    x1="100"
-                    y1="100"
-                    x2={100 + 50 * Math.sin((minutesRotation - 90) * (Math.PI / 180))}
-                    y2={100 - 50 * Math.cos((minutesRotation - 90) * (Math.PI / 180))}
-                    stroke="black"
-                    strokeWidth="3"
-                />
-            </svg>
+        <div className={(styles.clock)}>
+            <div className={(styles['analog-clock'])}>
+                <div className={(styles['dial'], styles['seconds'])} style={secondsStyle} />
+                <div className={(styles['dial'], styles['minutes'])} style={minutesStyle} />
+                <div className={(styles['dial'], styles['hours'])} style={hoursStyle} />
+            </div>
         </div>
     );
-};
+
+}
+

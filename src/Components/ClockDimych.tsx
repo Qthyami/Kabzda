@@ -1,28 +1,37 @@
-import React, {useEffect, useState} from 'react';
-export type propsType ={
+import React, { useEffect, useState } from 'react';
+import { ClockDimychAnalog } from './ClockDimychAnalog';
 
-}
-export const ClockDimych = (props:propsType) => {
-    const [date,setDate]=useState(new Date())
-    useEffect(()=>{
-       const intervalID= setInterval(()=>{
-            setDate(new Date());
-            console.log("Tick")
-        },1000)
-        return ()=>{ //возвращает ЮзЭффект колбэк, который запуститься только при
-            //размонтировке компоненты
-clearInterval(intervalID)
-        }
-    },[])  //пустой массив, потому что хотим, чтобы 1 раз запустился а дальше тикал сам
-    const get2DigitsString = (num:number)=>num<10 ? `0${num}`: num;
-    return (
-        <div>
-            <span>{get2DigitsString(date.getHours())}</span>
-            :
-            <span>{get2DigitsString(date.getMinutes())}</span>
-            :
-            <span>{get2DigitsString(date.getSeconds())}</span>
-        </div>
-    );
+export type propsType = {
+    mode?: 'digital' | 'analog';
 };
 
+export const ClockDimych: React.FC<propsType> = (props: propsType) => {
+    const [date, setDate] = useState(new Date());
+
+    useEffect(() => {
+        const intervalID = setInterval(() => {
+            setDate(new Date());
+            console.log('Tick');
+        }, 1000);
+
+        return () => {
+            clearInterval(intervalID);
+        };
+    }, []);
+
+    const get2DigitsString = (num: number) => (num < 10 ? `0${num}` : num);
+
+    return (
+        <>
+            {props.mode === 'digital' ? (
+                <div>
+                    <span>{get2DigitsString(date.getHours())}</span>:
+                    <span>{get2DigitsString(date.getMinutes())}</span>:
+                    <span>{get2DigitsString(date.getSeconds())}</span>
+                </div>
+            ) : (
+                <ClockDimychAnalog date={date}/>
+            )}
+        </>
+    );
+};
